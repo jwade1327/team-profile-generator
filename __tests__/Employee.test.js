@@ -1,15 +1,21 @@
 const Employee = require('../lib/Employee.js');
-const { TestScheduler } = require('jest');
-const { exportAllDeclaration } = require('@babel/types');
-const { JestEnvironment } = require('@jest/environment');
+
 test('creates an employee object', () => {
-    const employee = new Employee('');
-    expect(employee.name).toBe('');
+    const employee = new Employee('John');
+    expect(employee.getName).toBe(name);
 });
 
 test("creates employee's id as an object", () => {
-    const employee = new Employee('');
+    const employee = new Employee();
     expect(employee.getId()).toBe(expect.any(Number));
 });
 
-test('email')
+test('creates employee email as an object', () => {
+    const employee = new Employee();
+    expect(employee.getEmail()).toBe(email);
+});
+
+test('creates employee role as an object', () => {
+    const employee = new Employee();
+    expect(employee.getRole()).toBe(role);
+});
