@@ -4,7 +4,9 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
-const { default: generateEmptyCoverage } = require('@jest/reporters/build/generateEmptyCoverage');
+const {
+    default: generateEmptyCoverage
+} = require('@jest/reporters/build/generateEmptyCoverage');
 
 const team = [];
 
@@ -104,7 +106,7 @@ function startHtml() {
 }
 
 function addHtml(member) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         const name = member.getName();
         const role = member.getRole();
         const id = member.getId();
