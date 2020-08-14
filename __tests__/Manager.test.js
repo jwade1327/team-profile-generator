@@ -1,13 +1,21 @@
 const Manager = require('../lib/Manager');
-const { TestResult } = require('@jest/types');
-const { exportAllDeclaration } = require('@babel/types');
 
-test('getOfficeNumber() return number', () => {
-    const employee = new Manager;
-    expect(employee.getOfficeNumber).toBe(number);
+test('manager role', () => {
+    const manager = new Manager('Rob');
+    expect(manager.getName).toBe('Rob');
 });
 
-test('getRole() return Manager', () => {
-    const employee = new Manager;
-    expect(employee.getRole()).toBe(manager);
+test('manager id', () => {
+    const manager = new Manager('', '321');
+    expect(manager.getId).toBe('321');
+});
+
+test('manager email', () => {
+    const manager = new Manager('', '', 'manager@email.com');
+    expect(manager.getEmail).toBe('manager@email.com');
+});
+
+test('manager office number', () => {
+    const manager = new Manager('', '', '', '4442311');
+    expect(manager.getOfficeNumber).toBe('4442311');
 });

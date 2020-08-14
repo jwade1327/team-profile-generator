@@ -1,18 +1,23 @@
 const Engineer = require("../lib/Engineer");
-const { link } = require("fs");
 
-test('set GitHub account', () => {
-    const account = "GitHubUser";
-    const employee = new Engineer;
-    expect(employee.gitHub()).toBe(account);
+
+test('role Engineer', () => {
+    const engineer = new Engineer('Dave');
+    expect(engineer.getName).toBe('Dave');
 });
 
-test('getRole() return Engineer', () => {
-    const employee = new Engineer;
-    expect(employee.getRole()).toBe(engineer);
+test('engineer id', () => {
+    const engineer = new Engineer('', '987');
+    expect(engineer.getId).toBe('987');
+
 });
 
-test('link GitHub account', () => {
-    const employee = new Engineer;
-    expect(employee.gitGithub()).toBe(user);
+test('engineer email', () => {
+    const engineer = new Engineer ('', '', 'engineer@email.com');
+    expect(engineer.getEmail).toBe('engineer@email.com');
+});
+
+test('GitHub account', () => {
+    const engineer = new Engineer('', '', 'dwade');
+    expect(engineer.getGithub).toBe('dwade');
 });

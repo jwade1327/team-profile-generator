@@ -1,18 +1,21 @@
 const Intern = require('../lib/Intern');
-const { TestResult } = require('@jest/types');
-const { exportAllDeclaration } = require('@babel/types');
 
-test('create school as object', () => {
-    const employee = new Intern;
-    expect(intern.school).toBe(school);
+test('role Intern', () => {
+    const intern = new Intern('Raven');
+    expect(intern.getName).toBe('Raven');
 });
 
-test('getRole() return Intern', () => {
-    const employee = new Intern;
-    expect(employee.getRole()).toBe(intern);
+test('intern id', () => {
+    const intern = new Intern('', '456');
+    expect(intern.getId).toBe('456');
 });
 
-test('getSchool() return school', () => {
-    const employee = new Intern;
-    expect(employee.getSchool()).toBe(school);
+test('intern email', () => {
+    const intern = new Intern('', '', 'intern@email.com');
+    expect(intern.getEmail).toBe('intern@email.com');
+});
+
+test('intern school', () => {
+    const intern = new Intern('', '', 'UofIntern');
+    expect(intern.getSchool).toBe('UofIntern');
 });
