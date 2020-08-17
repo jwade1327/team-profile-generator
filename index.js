@@ -6,10 +6,10 @@ const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 const { writeFile, copyFile } = require('./page-template');
 
-const group = {
+const card = {
     manager: {},
     engineer: [],
-    interns: {}
+    intern: []
 };
 
 function Questions() {
@@ -157,7 +157,7 @@ function createNewEmployee() {
                     ]).then(engineerInfo => {
                         card.engineer.push(new Engineer(engineerInfo.name, engineerInfo.id, engineerInfo.email, engineerInfo.github))
                     }).then(confirmNewEmployee)
-            } else if (employeeInfo.employeeType === 'Intern') {
+            } else if (employeeInfo.employeeRole === 'Intern') {
                 inquirer
                     .prompt([{
                             type: 'input',

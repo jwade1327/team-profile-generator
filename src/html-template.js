@@ -19,13 +19,13 @@ const generateManager = (manager) => {
 
 
 
-const generateEngineers = (engineers) => {
-    if (engineers.length === 0) {
+const generateEngineer = (engineer) => {
+    if (engineer.length === 0) {
         return '';
     }
     return `<h2>Engineers</h2>
             <div id="engineerContainer" class="row">
-${engineers.map(engineer =>
+${engineer.map(engineer =>
            `<div id="engineerCardContainer" class="card">
                     <div class="card-body">
                         <h3 class="card-title">${engineer.getName()}</h3>
@@ -39,13 +39,13 @@ ${engineers.map(engineer =>
 }
 
 
-const generateInterns = (interns) => {
-    if (interns.length === 0) {
+const generateIntern = (intern) => {
+    if (intern.length === 0) {
         return '';
     }
-    return `<h2>Interns</h2>
+    return `<h2>Intern</h2>
             <div id="internContainer" class="row">
-${interns.map(intern =>
+${intern.map(intern =>
            `<div id="internCardContainer" class="card">
                     <div class="card-body">
                         <h3 class="card-title">${intern.getName()}</h3>
@@ -59,8 +59,8 @@ ${interns.map(intern =>
 }
 
 
-module.exports = group => {
-    console.log("html page", group)
+module.exports = card => {
+    console.log("html page", card)
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -80,12 +80,12 @@ module.exports = group => {
         <div class="container">
             <div class="row">
                 <div id="managerContainer" class="card">
-                    ${generateManager(group.manager)}
+                    ${generateManager(card.manager)}
                 </div>
             </div>
-            ${generateEngineers(group.engineers)}
+            ${generateEngineer(card.engineer)}
             
-            ${generateInterns(group.interns)}
+            ${generateIntern(card.intern)}
         </div>
     </main>
 </body>
