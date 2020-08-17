@@ -15,7 +15,22 @@ const writeFile = pageHTML => {
     });
 };
 
-module.export = writeFile;
+const copyFile = function() {
+    return new Promise((resolve, reject) => {
+        fs.copyFile('./src/style.css', './dist/stylee.css', err=> {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'File was created.'
+            });
+        });
+    });
+};
+
+module.export = { writeFile, copyFile };
 
 
 

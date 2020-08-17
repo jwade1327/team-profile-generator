@@ -1,7 +1,252 @@
+const fs = require('fs');
+const inquirer = require('inquirer');
 
+const Manager = require('./lib/Manager');
+const Intern = require('./lib/Intern');
+const Engineer = require('./lib/Engineer');
+const { writeFile, copyFile } = require('./page-template');
 
+const group = {
+    manager: {},
+    engineer: [],
+    interns: {}
+};
 
+function Questions() {
+    inquirer
+        .prompt([{
+                type: 'confirm',
+                name: 'confirmManager',
+                message: 'Do you want to create a Manager profile?',
+                default: true
+            },
+            {
+                type: 'input',
+                name: 'manager',
+                message: 'Manager name',
+                when: ({
+                    confirmManager
+                }) => confirmManager,
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log('Enter name of Manager');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'number',
+                name: 'id',
+                message: 'Manager ID',
+                when: ({
+                    confirmManager
+                }) => confirmManager,
+                validate: idNumber => {
+                    if (idNumber) {
+                        return true;
+                    } else {
+                        console.log('Enter id of Manager');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: 'Manager email',
+                when: ({
+                    confirmManager
+                }) => confirmManager,
+                validate: emailInput => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        console.log('Enter email of Manager');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'number',
+                name: 'officeNumber',
+                message: 'Manager office number',
+                when: ({
+                    confirmManager
+                }) => confirmManager,
+                validate: officeNumber => {
+                    if (officeNumber) {
+                        return true;
+                    } else {
+                        console.log('Enter office number of Manager');
+                        return false;
+                    }
+                }
+            }
+        ]).then(managerInfo => {
+            if (managerInfo.confirmManager === true) {
+                card.manager = new Manager(managerInfo.manager, managerInfo.id, managerInfo.email, managerInfo.officeNumber)
+                console.log(card.manager.getRole());
+            }
+        }).then(confirmNewEmployee)
+};
 
+function createNewEmployee() {
+    inquirer
+        .prompt([{
+            type: 'list',
+            name: 'employeeRole',
+            message: 'What is the employee role?',
+            choices: ['Engineer', 'Intern']
+        }]).then(employeeInfo => {
+            if (employeeInfo.employeeRole === 'Engineer') {
+                inquirer
+                    .prompt([{
+                            type: 'input',
+                            name: 'name',
+                            message: 'Engineer name',
+                            validate: nameInput => {
+                                if (nameInput) {
+                                    return true;
+                                } else {
+                                    console.log('Enter name of Engineer');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'number',
+                            name: 'id',
+                            message: 'Engineer ID',
+                            validate: idNumber => {
+                                if (idNumber) {
+                                    return true;
+                                } else {
+                                    console.log('Enter Engineer ID');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'input',
+                            name: 'email',
+                            message: 'Engineer email',
+                            validate: emailInput => {
+                                if (emailInput) {
+                                    return true;
+                                } else {
+                                    console.log('Enter Engineer email');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'input',
+                            name: 'github',
+                            message: 'Engineer github',
+                            validate: githubInput => {
+                                if (githubInput) {
+                                    return true;
+                                } else {
+                                    console.log('Enter Engineer github');
+                                    return false;
+                                }
+                            }
+                        }
+                    ]).then(engineerInfo => {
+                        card.engineer.push(new Engineer(engineerInfo.name, engineerInfo.id, engineerInfo.email, engineerInfo.github))
+                    }).then(confirmNewEmployee)
+            } else if (employeeInfo.employeeType === 'Intern') {
+                inquirer
+                    .prompt([{
+                            type: 'input',
+                            name: 'name',
+                            message: 'Intern name',
+                            validate: nameInput => {
+                                if (nameInput) {
+                                    return true;
+                                } else {
+                                    console.log('Enter name of Intern');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'input',
+                            name: 'id',
+                            message: 'Intern ID',
+                            validate: idNumber => {
+                                if (idNumber) {
+                                    return true;
+                                } else {
+                                    console.log('Enter Intern ID');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'input',
+                            name: 'email',
+                            message: 'Intern email',
+                            validate: emailInput => {
+                                if (emailInput) {
+                                    return true;
+                                } else {
+                                    console.log('Enter Intern email');
+                                    return false;
+                                }
+                            }
+                        },
+                        {
+                            type: 'input',
+                            name: 'school',
+                            message: 'Intern school',
+                            validate: schoolInput => {
+                                if (schoolInput) {
+                                    return true;
+                                } else {
+                                    console.log('Enter Intern school');
+                                    return false;
+                                }
+                            }
+                        }
+                    ]).then(internInfo => {
+                        card.intern.push(new Intern(internInfo.name, internInfo.id, internInfo.email, internInfo.school))
+                    }).then(confirmNewEmployee)
+            }
+        })
+};
+
+function confirmNewEmployee() {
+    inquirer
+        .prompt([{
+            type: 'confirm',
+            name: 'newEmployee',
+            message: 'Do you want to create a new Employee?',
+            default: true
+        }]).then(answer => {
+            if (answer.newEmployee === true) {
+                createNewEmployee();
+            } else if (answer.newEmployee === false) {
+                createHTML();
+            }
+        })
+};
+
+function createHTML() {
+    var data = templateHTML(card);
+    writeFile(info)
+        .then(writeFileResponse => {
+            console.log(writeFileResponse);
+            return fs.copyFile();
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+Questions();
 
 
 
