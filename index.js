@@ -235,7 +235,7 @@ function confirmNewEmployee() {
 };
 
 function createHTML() {
-    var data = templateHTML(card);
+    var data = pageTemplate(card);
     writeFile(info)
         .then(writeFileResponse => {
             console.log(writeFileResponse);

@@ -23,7 +23,7 @@ const generateEngineer = (engineer) => {
     if (engineer.length === 0) {
         return '';
     }
-    return `<h2>Engineers</h2>
+    return `<h2>Engineer</h2>
             <div id="engineerContainer" class="row">
 ${engineer.map(engineer =>
            `<div id="engineerCardContainer" class="card">
@@ -70,11 +70,11 @@ module.exports = card => {
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <title>Employees</title>
+    <title>Team</title>
 </head>
 <body>
     <header>
-        <h1 class="text-light bg-dark text-center font-weight-bold">EMPLOYEE LIST</h1>
+        <h1 class="text-light bg-dark text-center font-weight-bold">TEAM</h1>
     </header>
     <main>
         <div class="container">
