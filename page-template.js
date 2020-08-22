@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-const writeFile = pageHTML => {
+const writeFile = HTMLTemplate => {
     return new Promise((resolve, reject) => {
-        fs.writeFile('./dist/team.html', pageHTML, err => {
+        fs.writeFile('./dist/team.html', HTMLTemplate, err => {
             if (err) {
                 reject(err);
                 return;

@@ -4,7 +4,8 @@ const inquirer = require('inquirer');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
-const { writeFile, copyFile } = require('./page-template');
+const { writeFile, copyFile } = require('./src/html-template');
+
 
 const card = {
     manager: {},
@@ -235,7 +236,7 @@ function confirmNewEmployee() {
 };
 
 function createHTML() {
-    var data = pageTemplate(card);
+    var info = HTMLTemplate(card);
     writeFile(info)
         .then(writeFileResponse => {
             console.log(writeFileResponse);
@@ -247,6 +248,7 @@ function createHTML() {
 }
 
 Questions();
+
 
 
 
